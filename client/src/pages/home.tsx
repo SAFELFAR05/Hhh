@@ -1,30 +1,24 @@
 import { useState } from "react";
 import { DownloaderForm } from "@/components/downloader-form";
-import { DownloadResult } from "@/components/download-result";
-import { useDownload, DownloadResponse } from "@/lib/api";
 import { motion } from "framer-motion";
 import { Download, Zap, Shield, Globe, Video, Music, Image as ImageIcon, FileVideo } from "lucide-react";
 import { Icons } from "@/components/icons";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import generatedImage from '@assets/generated_images/dark_abstract_cybernetic_background_with_glowing_lines.png';
 
 export default function Home() {
-  const [result, setResult] = useState<DownloadResponse | null>(null);
-  const { mutate: download, isPending } = useDownload();
-
-  const handleDownload = (url: string) => {
-    setResult(null);
-    download(url, {
-      onSuccess: (data) => {
-        setResult(data);
-      },
-    });
+  const [location, setLocation] = useLocation();
+  
+  // Instead of fetching here, we just redirect to the download page with the URL
+  const handleDownloadSubmit = (url: string) => {
+    // Encode the URL to ensure it passes safely as a query parameter
+    setLocation(`/download?url=${encodeURIComponent(url)}`);
   };
 
   // Full list of supported platforms
   const supportedPlatforms = [
     { name: "TikTok", icon: Icons.TikTok, color: "text-[#ff0050]" },
-    { name: "Douyin", icon: Icons.TikTok, color: "text-white" }, // Same icon
+    { name: "Douyin", icon: Icons.TikTok, color: "text-white" }, 
     { name: "Capcut", icon: FileVideo, color: "text-white" },
     { name: "Threads", icon: Icons.Threads, color: "text-white" },
     { name: "Instagram", icon: Icons.Instagram, color: "text-[#E1306C]" },
@@ -128,10 +122,9 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <DownloaderForm onSubmit={handleDownload} isLoading={isPending} />
+              {/* Passed false to isLoading because we don't fetch here anymore */}
+              <DownloaderForm onSubmit={handleDownloadSubmit} isLoading={false} />
             </motion.div>
-
-            {result && <DownloadResult data={result} />}
           </div>
         </section>
 

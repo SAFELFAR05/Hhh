@@ -9,11 +9,13 @@ import About from "@/pages/about";
 import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
 import Contact from "@/pages/contact";
+import DownloadPage from "@/pages/download"; // Import page
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/download" component={DownloadPage} /> {/* Register Route */}
       <Route path="/about" component={About} />
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
