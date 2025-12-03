@@ -3,7 +3,7 @@ import { DownloaderForm } from "@/components/downloader-form";
 import { DownloadResult } from "@/components/download-result";
 import { useDownload, DownloadResponse } from "@/lib/api";
 import { motion } from "framer-motion";
-import { Download, Zap, Shield, Globe } from "lucide-react";
+import { Download, Zap, Shield, Globe, Video, Music, Image as ImageIcon, FileVideo } from "lucide-react";
 import { Icons } from "@/components/icons";
 import { Link } from "wouter";
 import generatedImage from '@assets/generated_images/dark_abstract_cybernetic_background_with_glowing_lines.png';
@@ -21,18 +21,59 @@ export default function Home() {
     });
   };
 
+  // Full list of supported platforms
   const supportedPlatforms = [
     { name: "TikTok", icon: Icons.TikTok, color: "text-[#ff0050]" },
-    { name: "Instagram", icon: Icons.Instagram, color: "text-[#E1306C]" },
-    { name: "YouTube", icon: Icons.YouTube, color: "text-[#FF0000]" },
-    { name: "Facebook", icon: Icons.Facebook, color: "text-[#1877F2]" },
-    { name: "Twitter / X", icon: Icons.TwitterX, color: "text-white" },
-    { name: "Spotify", icon: Icons.Spotify, color: "text-[#1DB954]" },
-    { name: "Pinterest", icon: Icons.Pinterest, color: "text-[#E60023]" },
+    { name: "Douyin", icon: Icons.TikTok, color: "text-white" }, // Same icon
+    { name: "Capcut", icon: FileVideo, color: "text-white" },
     { name: "Threads", icon: Icons.Threads, color: "text-white" },
-    { name: "SoundCloud", icon: Icons.SoundCloud, color: "text-[#ff5500]" },
+    { name: "Instagram", icon: Icons.Instagram, color: "text-[#E1306C]" },
+    { name: "Facebook", icon: Icons.Facebook, color: "text-[#1877F2]" },
+    { name: "ESPN", icon: Video, color: "text-red-600" },
+    { name: "Pinterest", icon: Icons.Pinterest, color: "text-[#E60023]" },
+    { name: "IMDb", icon: Video, color: "text-yellow-500" },
+    { name: "Imgur", icon: ImageIcon, color: "text-green-500" },
+    { name: "iFunny", icon: ImageIcon, color: "text-yellow-400" },
+    { name: "Izlesene", icon: Video, color: "text-orange-500" },
+    { name: "Reddit", icon: Icons.Reddit, color: "text-[#FF4500]" },
+    { name: "YouTube", icon: Icons.YouTube, color: "text-[#FF0000]" },
+    { name: "Twitter / X", icon: Icons.TwitterX, color: "text-white" },
+    { name: "Vimeo", icon: Icons.Vimeo, color: "text-[#1AB7EA]" },
+    { name: "Snapchat", icon: Icons.Snapchat, color: "text-[#FFFC00]" },
+    { name: "Bilibili", icon: Icons.Bilibili, color: "text-[#23ADE5]" },
+    { name: "Dailymotion", icon: Video, color: "text-white" },
+    { name: "Sharechat", icon: Globe, color: "text-white" },
+    { name: "Likee", icon: Video, color: "text-purple-400" },
     { name: "LinkedIn", icon: Icons.LinkedIn, color: "text-[#0077b5]" },
-    { name: "Twitch", icon: Icons.Twitch, color: "text-[#9146FF]" },
+    { name: "Tumblr", icon: Icons.Tumblr, color: "text-white" },
+    { name: "Hipi", icon: Video, color: "text-white" },
+    { name: "Telegram", icon: Icons.Telegram, color: "text-[#26A5E4]" },
+    { name: "GetStickerPack", icon: ImageIcon, color: "text-blue-400" },
+    { name: "Bitchute", icon: Video, color: "text-red-500" },
+    { name: "Febspot", icon: Video, color: "text-purple-500" },
+    { name: "9GAG", icon: ImageIcon, color: "text-white" },
+    { name: "OK.ru", icon: Globe, color: "text-orange-500" },
+    { name: "Rumble", icon: Video, color: "text-green-500" },
+    { name: "Streamable", icon: Video, color: "text-blue-400" },
+    { name: "TED", icon: Video, color: "text-red-600" },
+    { name: "SohuTV", icon: Video, color: "text-yellow-500" },
+    { name: "XVideos", icon: Video, color: "text-red-500" },
+    { name: "XNXX", icon: Video, color: "text-blue-500" },
+    { name: "Xiaohongshu", icon: Globe, color: "text-red-500" },
+    { name: "Ixigua", icon: Video, color: "text-red-500" },
+    { name: "Weibo", icon: Globe, color: "text-yellow-400" },
+    { name: "Miaopai", icon: Video, color: "text-white" },
+    { name: "Meipai", icon: Video, color: "text-pink-500" },
+    { name: "Xiaoying", icon: Video, color: "text-orange-400" },
+    { name: "National Video", icon: Video, color: "text-blue-600" },
+    { name: "Yingke", icon: Video, color: "text-cyan-400" },
+    { name: "Sina", icon: Globe, color: "text-yellow-600" },
+    { name: "VK Video", icon: Icons.VK, color: "text-[#0077FF]" },
+    { name: "SoundCloud", icon: Icons.SoundCloud, color: "text-[#ff5500]" },
+    { name: "Mixcloud", icon: Music, color: "text-blue-400" },
+    { name: "Spotify", icon: Icons.Spotify, color: "text-[#1DB954]" },
+    { name: "ZingMP3", icon: Music, color: "text-purple-500" },
+    { name: "Bandcamp", icon: Music, color: "text-cyan-500" },
   ];
 
   return (
@@ -99,20 +140,20 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Supported Platforms</h2>
-              <p className="text-muted-foreground">We support downloading from all major social media platforms.</p>
+              <p className="text-muted-foreground">We support downloading from 50+ major social media platforms.</p>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {supportedPlatforms.map((platform, i) => (
                 <motion.div 
                   key={i}
-                  whileHover={{ y: -5 }}
-                  className="flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-primary/30 transition-all cursor-default group"
+                  whileHover={{ y: -3, backgroundColor: "rgba(255,255,255,0.08)" }}
+                  className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/5 transition-all cursor-default group"
                 >
-                  <div className={`w-12 h-12 flex items-center justify-center transition-transform group-hover:scale-110 ${platform.color}`}>
-                    <platform.icon className="w-8 h-8 fill-current" />
+                  <div className={`w-8 h-8 flex-shrink-0 flex items-center justify-center ${platform.color}`}>
+                    <platform.icon className="w-6 h-6 fill-current" />
                   </div>
-                  <span className="font-medium text-sm opacity-80 group-hover:opacity-100">{platform.name}</span>
+                  <span className="font-medium text-sm opacity-80 group-hover:opacity-100 truncate">{platform.name}</span>
                 </motion.div>
               ))}
             </div>
