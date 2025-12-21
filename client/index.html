@@ -466,14 +466,15 @@
     <!-- Animated Background Script -->
     <script>
         const bgCanvas = document.getElementById('bgCanvas');
-        const ctx = bgCanvas.getContext('2d');
+        const ctx = bgCanvas.getContext('2d', { alpha: true });
         
         let rings = [];
-        const ringCount = 400;
+        const ringCount = 150;
         let baseSize = 1;
         let rotX = 0.002;
         let rotY = 0.002;
         let pulseTick = 0;
+        let frameSkip = 0;
         
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -535,18 +536,23 @@
         }
         
         function animateBg() {
-            ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            frameSkip++;
             
-            pulseTick += 0.01;
-            rotX = 0.0008;
-            rotY = 0.0012;
-            
-            rings.sort((a, b) => b.z3d - a.z3d);
-            
-            rings.forEach(r => {
-                r.rotate();
-                r.draw();
-            });
+            // Update every frame, tapi render setiap 2 frame (lebih ringan)
+            if (frameSkip % 2 === 0) {
+                ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+                
+                pulseTick += 0.01;
+                rotX = 0.0008;
+                rotY = 0.0012;
+                
+                rings.sort((a, b) => b.z3d - a.z3d);
+                
+                rings.forEach(r => {
+                    r.rotate();
+                    r.draw();
+                });
+            }
             
             requestAnimationFrame(animateBg);
         }
