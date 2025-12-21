@@ -73,6 +73,7 @@ button {
     justify-content: space-between;
     align-items: center;
     height: 64px;
+    gap: 16px;
 }
 
 .navbar-brand {
