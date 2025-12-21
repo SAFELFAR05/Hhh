@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <!-- Animated Background Canvas -->
+    <canvas id="bgCanvas" class="animated-bg"></canvas>
+    
     <!-- Navbar -->
     <header class="navbar">
         <div class="container navbar-content">
@@ -459,5 +462,103 @@
     </footer>
 
     <script src="js/script.js"></script>
+    
+    <!-- Animated Background Script -->
+    <script>
+        const bgCanvas = document.getElementById('bgCanvas');
+        const ctx = bgCanvas.getContext('2d');
+        
+        let rings = [];
+        const ringCount = 400;
+        let baseSize = 1;
+        let rotX = 0.002;
+        let rotY = 0.002;
+        let pulseTick = 0;
+        
+        function resizeBg() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            baseSize = Math.min(bgCanvas.width, bgCanvas.height) * 0.2;
+        }
+        
+        class BgRing {
+            constructor(t) {
+                this.t = t;
+                this.updateCoordinates();
+                const hue = (t * 60 + 200) % 360;
+                this.color = `hsla(${hue}, 70%, 50%, 0.3)`;
+            }
+            
+            updateCoordinates() {
+                const scale = baseSize;
+                this.x3d = Math.sin(this.t) * scale;
+                this.y3d = (Math.sin(this.t) * Math.cos(this.t)) * scale * 2;
+                this.z3d = Math.cos(this.t) * (scale * 1.2);
+            }
+            
+            rotate() {
+                let y1 = this.y3d * Math.cos(rotX) - this.z3d * Math.sin(rotX);
+                let z1 = this.y3d * Math.sin(rotX) + this.z3d * Math.cos(rotX);
+                this.y3d = y1;
+                this.z3d = z1;
+                
+                let x2 = this.x3d * Math.cos(rotY) + this.z3d * Math.sin(rotY);
+                let z2 = -this.x3d * Math.sin(rotY) + this.z3d * Math.cos(rotY);
+                this.x3d = x2;
+                this.z3d = z2;
+            }
+            
+            draw() {
+                const zOffset = 800;
+                let perspective = zOffset / (zOffset + this.z3d);
+                
+                let x2d = (this.x3d * perspective) + bgCanvas.width / 2;
+                let y2d = (this.y3d * perspective) + bgCanvas.height / 2;
+                
+                const pulse = Math.sin(pulseTick + this.t * 2) * 8;
+                const dynamicRadius = (30 + pulse) * perspective;
+                
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 0.5 * perspective;
+                ctx.beginPath();
+                ctx.arc(x2d, y2d, Math.max(0.1, dynamicRadius), 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+        
+        function initBg() {
+            rings = [];
+            for (let i = 0; i < ringCount; i++) {
+                let t = (i / ringCount) * Math.PI * 2;
+                rings.push(new BgRing(t));
+            }
+        }
+        
+        function animateBg() {
+            ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            
+            pulseTick += 0.01;
+            rotX += 0.0008;
+            rotY += 0.0012;
+            
+            rings.sort((a, b) => b.z3d - a.z3d);
+            
+            rings.forEach(r => {
+                r.rotate();
+                r.draw();
+            });
+            
+            requestAnimationFrame(animateBg);
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeBg();
+            initBg();
+        });
+        
+        resizeBg();
+        initBg();
+        animateBg();
+    </script>
 </body>
 </html>
