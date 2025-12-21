@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Download, Zap, Shield, Globe, Video, Music, Image as ImageIcon, FileVideo } from "lucide-react";
 import { Icons } from "@/components/icons";
 import { Link, useLocation } from "wouter";
-import generatedImage from '@assets/generated_images/dark_abstract_cybernetic_background_with_glowing_lines.png';
+
+const generatedImage = new URL('../../attached_assets/generated_images/dark_abstract_cybernetic_background_with_glowing_lines.png', import.meta.url).href;
 
 export default function Home() {
   const [location, setLocation] = useLocation();
