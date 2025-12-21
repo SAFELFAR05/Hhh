@@ -409,6 +409,24 @@ button {
     opacity: 1;
 }
 
+/* Brand Colors */
+.brand-spotify .platform-icon { filter: brightness(0) saturate(100%) invert(35%) sepia(76%) hue-rotate(85deg) brightness(105%) contrast(101%); }
+.brand-youtube .platform-icon { filter: brightness(0) saturate(100%) invert(31%) sepia(89%) hue-rotate(0deg) brightness(107%) contrast(103%); }
+.brand-instagram .platform-icon { filter: brightness(0) saturate(100%) invert(44%) sepia(96%) hue-rotate(320deg) brightness(104%) contrast(101%); }
+.brand-facebook .platform-icon { filter: brightness(0) saturate(100%) invert(29%) sepia(75%) hue-rotate(200deg) brightness(106%) contrast(101%); }
+.brand-reddit .platform-icon { filter: brightness(0) saturate(100%) invert(31%) sepia(89%) hue-rotate(0deg) brightness(107%) contrast(103%); }
+.brand-linkedin .platform-icon { filter: brightness(0) saturate(100%) invert(29%) sepia(75%) hue-rotate(200deg) brightness(106%) contrast(101%); }
+.brand-snapchat .platform-icon { filter: brightness(0) saturate(100%) invert(97%) sepia(100%) hue-rotate(45deg) brightness(105%) contrast(101%); }
+.brand-pinterest .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(87%) hue-rotate(0deg) brightness(110%) contrast(104%); }
+.brand-telegram .platform-icon { filter: brightness(0) saturate(100%) invert(40%) sepia(77%) hue-rotate(200deg) brightness(106%) contrast(102%); }
+.brand-tiktok .platform-icon { filter: brightness(0) saturate(100%) invert(97%) sepia(100%) hue-rotate(140deg) brightness(105%) contrast(101%); }
+.brand-bilibili .platform-icon { filter: brightness(0) saturate(100%) invert(50%) sepia(78%) hue-rotate(200deg) brightness(106%) contrast(101%); }
+.brand-twitch .platform-icon { filter: brightness(0) saturate(100%) invert(36%) sepia(85%) hue-rotate(260deg) brightness(105%) contrast(101%); }
+.brand-soundcloud .platform-icon { filter: brightness(0) saturate(100%) invert(40%) sepia(80%) hue-rotate(0deg) brightness(107%) contrast(103%); }
+.brand-vimeo .platform-icon { filter: brightness(0) saturate(100%) invert(45%) sepia(77%) hue-rotate(200deg) brightness(105%) contrast(101%); }
+.brand-threads .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
+.brand-twitter .platform-icon { filter: brightness(1); }
+
 /* ============ FEATURES SECTION ============ */
 .features-section {
     background: transparent;
