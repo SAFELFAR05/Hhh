@@ -206,21 +206,7 @@ button {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #22d3ee, #3b82f6, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 4s ease-in-out infinite;
-    filter: brightness(1.2);
-}
-
-@keyframes gradient-shift {
-    0%, 100% {
-        background: linear-gradient(135deg, #22d3ee, #3b82f6, #a855f7);
-    }
-    50% {
-        background: linear-gradient(135deg, #3b82f6, #a855f7, #22d3ee);
-    }
+    color: #f0f7ff;
 }
 
 .hero-description {
