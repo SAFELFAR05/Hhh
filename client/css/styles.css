@@ -409,58 +409,60 @@ button {
     opacity: 1;
 }
 
-/* Brand Colors - Bold & Saturated */
-.brand-spotify .platform-icon { filter: brightness(0) saturate(100%) invert(42%) sepia(87%) hue-rotate(85deg) brightness(110%) contrast(106%); }
-.brand-youtube .platform-icon { filter: brightness(0) saturate(100%) invert(24%) sepia(99%) hue-rotate(0deg) brightness(110%) contrast(110%); }
-.brand-instagram .platform-icon { filter: brightness(0) saturate(100%) invert(37%) sepia(99%) hue-rotate(320deg) brightness(110%) contrast(108%); }
-.brand-facebook .platform-icon { filter: brightness(0) saturate(100%) invert(21%) sepia(95%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-reddit .platform-icon { filter: brightness(0) saturate(100%) invert(22%) sepia(98%) hue-rotate(-5deg) brightness(110%) contrast(110%); }
-.brand-linkedin .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(95%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-snapchat .platform-icon { filter: brightness(0) saturate(100%) invert(98%) sepia(100%) hue-rotate(50deg) brightness(110%) contrast(108%); }
-.brand-pinterest .platform-icon { filter: brightness(0) saturate(100%) invert(12%) sepia(98%) hue-rotate(-5deg) brightness(115%) contrast(110%); }
-.brand-telegram .platform-icon { filter: brightness(0) saturate(100%) invert(33%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-tiktok .platform-icon { filter: brightness(0) saturate(100%) invert(98%) sepia(100%) hue-rotate(140deg) brightness(110%) contrast(108%); }
-.brand-bilibili .platform-icon { filter: brightness(0) saturate(100%) invert(48%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-twitch .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(95%) hue-rotate(260deg) brightness(110%) contrast(108%); }
-.brand-soundcloud .platform-icon { filter: brightness(0) saturate(100%) invert(32%) sepia(99%) hue-rotate(-5deg) brightness(110%) contrast(110%); }
-.brand-vimeo .platform-icon { filter: brightness(0) saturate(100%) invert(38%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
+/* Brand Colors - Vibrant & Bold */
+.platform-icon { filter: contrast(1.2) saturate(1.3); }
+.brand-spotify .platform-icon { filter: brightness(0) saturate(100%) invert(45%) sepia(95%) hue-rotate(85deg) brightness(115%) contrast(125%); }
+.brand-youtube .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(100%) hue-rotate(-5deg) brightness(115%) contrast(125%); }
+.brand-instagram .platform-icon { filter: brightness(0) saturate(100%) invert(30%) sepia(100%) hue-rotate(320deg) brightness(115%) contrast(125%); }
+.brand-facebook .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-reddit .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(100%) hue-rotate(-5deg) brightness(115%) contrast(125%); }
+.brand-linkedin .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-snapchat .platform-icon { filter: brightness(0) saturate(100%) invert(100%) sepia(100%) hue-rotate(50deg) brightness(120%) contrast(120%); }
+.brand-pinterest .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-5deg) brightness(120%) contrast(130%); }
+.brand-telegram .platform-icon { filter: brightness(0) saturate(100%) invert(27%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-tiktok .platform-icon { filter: brightness(0) saturate(100%) invert(100%) sepia(100%) hue-rotate(140deg) brightness(120%) contrast(125%); }
+.brand-bilibili .platform-icon { filter: brightness(0) saturate(100%) invert(45%) sepia(95%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-twitch .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(260deg) brightness(115%) contrast(125%); }
+.brand-soundcloud .platform-icon { filter: brightness(0) saturate(100%) invert(25%) sepia(100%) hue-rotate(-5deg) brightness(115%) contrast(125%); }
+.brand-vimeo .platform-icon { filter: brightness(0) saturate(100%) invert(32%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
 .brand-threads .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
 .brand-twitter .platform-icon { filter: brightness(0) saturate(100%); }
 .brand-capcut .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
-.brand-douyin .platform-icon { filter: brightness(0) saturate(100%) invert(98%) sepia(100%) hue-rotate(140deg) brightness(110%) contrast(108%); }
-.brand-espn .platform-icon { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) hue-rotate(-10deg) brightness(115%) contrast(112%); }
-.brand-imdb .platform-icon { filter: brightness(0) saturate(100%) invert(18%) sepia(95%) hue-rotate(45deg) brightness(110%) contrast(108%); }
-.brand-imgur .platform-icon { filter: brightness(0) saturate(100%) invert(32%) sepia(88%) hue-rotate(150deg) brightness(110%) contrast(108%); }
-.brand-ifunny .platform-icon { filter: brightness(0) saturate(100%) invert(98%) sepia(100%) hue-rotate(45deg) brightness(110%) contrast(108%); }
+.brand-douyin .platform-icon { filter: brightness(0) saturate(100%) invert(100%) sepia(100%) hue-rotate(140deg) brightness(120%) contrast(125%); }
+.brand-espn .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-10deg) brightness(120%) contrast(130%); }
+.brand-imdb .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(45deg) brightness(115%) contrast(125%); }
+.brand-imgur .platform-icon { filter: brightness(0) saturate(100%) invert(25%) sepia(100%) hue-rotate(150deg) brightness(115%) contrast(125%); }
+.brand-ifunny .platform-icon { filter: brightness(0) saturate(100%) invert(100%) sepia(100%) hue-rotate(45deg) brightness(120%) contrast(125%); }
 .brand-izlesene .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
-.brand-tumblr .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(220deg) brightness(110%) contrast(108%); }
+.brand-tumblr .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(220deg) brightness(115%) contrast(125%); }
 .brand-hipi .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
-.brand-getpackages .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-bitchute .platform-icon { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) hue-rotate(-5deg) brightness(115%) contrast(112%); }
+.brand-getpackages .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-bitchute .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-5deg) brightness(120%) contrast(130%); }
 .brand-febspot .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
 .brand-9gag .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
-.brand-ok .platform-icon { filter: brightness(0) saturate(100%) invert(38%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-rumble .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(95%) hue-rotate(120deg) brightness(110%) contrast(108%); }
-.brand-streamable .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-ted .platform-icon { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) hue-rotate(-5deg) brightness(115%) contrast(112%); }
-.brand-sohu .platform-icon { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) hue-rotate(-5deg) brightness(115%) contrast(112%); }
-.brand-xvideos .platform-icon { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) hue-rotate(-5deg) brightness(115%) contrast(112%); }
-.brand-xnxx .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-xiaohongshu .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(98%) hue-rotate(-5deg) brightness(115%) contrast(112%); }
-.brand-ixigua .platform-icon { filter: brightness(0) saturate(100%) invert(18%) sepia(98%) hue-rotate(-5deg) brightness(115%) contrast(112%); }
-.brand-weibo .platform-icon { filter: brightness(0) saturate(100%) invert(35%) sepia(99%) hue-rotate(0deg) brightness(110%) contrast(110%); }
+.brand-ok .platform-icon { filter: brightness(0) saturate(100%) invert(32%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-rumble .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(120deg) brightness(115%) contrast(125%); }
+.brand-streamable .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-ted .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-5deg) brightness(120%) contrast(130%); }
+.brand-sohu .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-5deg) brightness(120%) contrast(130%); }
+.brand-xvideos .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-5deg) brightness(120%) contrast(130%); }
+.brand-xnxx .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-xiaohongshu .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-5deg) brightness(120%) contrast(130%); }
+.brand-ixigua .platform-icon { filter: brightness(0) saturate(100%) invert(10%) sepia(100%) hue-rotate(-5deg) brightness(120%) contrast(130%); }
+.brand-weibo .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(100%) hue-rotate(0deg) brightness(115%) contrast(125%); }
 .brand-miaopai .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
-.brand-meipai .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(300deg) brightness(110%) contrast(108%); }
-.brand-xiaoying .platform-icon { filter: brightness(0) saturate(100%) invert(32%) sepia(88%) hue-rotate(150deg) brightness(110%) contrast(108%); }
+.brand-meipai .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(300deg) brightness(115%) contrast(125%); }
+.brand-xiaoying .platform-icon { filter: brightness(0) saturate(100%) invert(25%) sepia(100%) hue-rotate(150deg) brightness(115%) contrast(125%); }
 .brand-nationalvideo .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
 .brand-yingke .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
-.brand-sina .platform-icon { filter: brightness(0) saturate(100%) invert(35%) sepia(99%) hue-rotate(45deg) brightness(110%) contrast(110%); }
-.brand-vk .platform-icon { filter: brightness(0) saturate(100%) invert(21%) sepia(95%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-mixcloud .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-zingmp3 .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(260deg) brightness(110%) contrast(108%); }
-.brand-bandcamp .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
-.brand-dailymotion .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(88%) hue-rotate(200deg) brightness(110%) contrast(108%); }
+.brand-sina .platform-icon { filter: brightness(0) saturate(100%) invert(28%) sepia(100%) hue-rotate(45deg) brightness(115%) contrast(125%); }
+.brand-vk .platform-icon { filter: brightness(0) saturate(100%) invert(15%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-mixcloud .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-zingmp3 .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(260deg) brightness(115%) contrast(125%); }
+.brand-bandcamp .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
+.brand-dailymotion .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(200deg) brightness(115%) contrast(125%); }
 .brand-sharechat .platform-icon { filter: brightness(0) saturate(100%) invert(100%); }
+.brand-likee .platform-icon { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) hue-rotate(260deg) brightness(115%) contrast(125%); }
 
 /* ============ FEATURES SECTION ============ */
 .features-section {
