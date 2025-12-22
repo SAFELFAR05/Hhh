@@ -20,6 +20,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Auto Language Detection -->
+    <script>
+        (function() {
+            // Check if user previously selected language
+            const langPreference = localStorage.getItem('selectedLanguage');
+            if (langPreference) return;
+            
+            // Detect country by IP
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.country_code === 'ID') {
+                        window.location.href = 'index-id.html';
+                    }
+                })
+                .catch(error => console.log('Language auto-detect skipped'));
+        })();
+    </script>
 </head>
 <body>
     <!-- Animated Background Canvas -->
@@ -47,8 +66,8 @@
                     <span>EN</span>
                 </button>
                 <div class="lang-dropdown">
-                    <a href="index.html">English</a>
-                    <a href="index-id.html">Bahasa Indonesia</a>
+                    <a href="index.html" onclick="localStorage.setItem('selectedLanguage', 'en'); return true;">English</a>
+                    <a href="index-id.html" onclick="localStorage.setItem('selectedLanguage', 'id'); return true;">Bahasa Indonesia</a>
                 </div>
             </div>
             <nav class="navbar-nav">
