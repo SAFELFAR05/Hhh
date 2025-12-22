@@ -95,11 +95,7 @@ function displaySearchResults(items) {
 }
 
 function selectVideo(videoUrl) {
-    const urlInput = document.getElementById('urlInput');
-    const searchResults = document.getElementById('searchResults');
-    
-    urlInput.value = videoUrl;
-    searchResults.innerHTML = '';
+    window.location.href = `/download.html?url=${encodeURIComponent(videoUrl)}`;
 }
 
 function escapeHtml(text) {
