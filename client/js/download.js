@@ -47,13 +47,22 @@ async function fetchVideoData(url) {
             throw new Error("Invalid YouTube URL or video not found.");
         }
 
-        displayResults(data.data, isShort);
+        // Extract video ID for thumbnail if Short
+        let shortVideoId = null;
+        if (isShort) {
+            const shortMatch = url.match(/shorts\/([\w-]+)/);
+            if (shortMatch) {
+                shortVideoId = shortMatch[1];
+            }
+        }
+
+        displayResults(data.data, isShort, shortVideoId);
     } catch (error) {
         showError(error.message);
     }
 }
 
-function displayResults(data, isShort = false) {
+function displayResults(data, isShort = false, shortVideoId = null) {
     loadingState.style.display = 'none';
     errorState.style.display = 'none';
     resultsState.style.display = 'block';
@@ -62,11 +71,17 @@ function displayResults(data, isShort = false) {
 
     let downloadUrl = '';
     let videoTitle = '';
+    let thumbnailUrl = '';
 
     if (isShort) {
         // Handle YouTube Shorts format: { title, download }
         videoTitle = data.title;
         downloadUrl = data.download;
+        
+        // Generate thumbnail URL from video ID
+        if (shortVideoId) {
+            thumbnailUrl = `https://i.ytimg.com/vi/${shortVideoId}/maxresdefault.jpg`;
+        }
     } else {
         // Handle regular YouTube format: { metadata, dlink }
         const { metadata, dlink } = data;
@@ -145,13 +160,19 @@ function displayResults(data, isShort = false) {
         }
     }
 
-    // For Shorts: Display title without the video card
+    // For Shorts: Display title with thumbnail
     if (isShort && videoTitle) {
         const videoCard = document.getElementById('videoCard');
         videoCard.style.display = 'block';
         
-        const thumbnailSection = document.getElementById('thumbnailSection');
-        thumbnailSection.style.display = 'none';
+        if (thumbnailUrl) {
+            const thumbnailSection = document.getElementById('thumbnailSection');
+            thumbnailSection.style.display = 'block';
+            document.getElementById('thumbnail').src = thumbnailUrl;
+        } else {
+            const thumbnailSection = document.getElementById('thumbnailSection');
+            thumbnailSection.style.display = 'none';
+        }
         
         document.getElementById('videoTitle').textContent = videoTitle;
         
