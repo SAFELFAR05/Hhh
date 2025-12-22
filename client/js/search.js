@@ -1,5 +1,9 @@
-const YOUTUBE_API_KEY = 'AIzaSyAPozavhnaoDbUarZB6rQlfar1K6qlLnCE';
 let searchTimeout;
+
+// Get backend API base URL
+const API_BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:5000' 
+  : '';
 
 document.addEventListener('DOMContentLoaded', function() {
     const urlInput = document.getElementById('urlInput');
@@ -43,20 +47,20 @@ async function searchYouTube(query) {
     searchResults.innerHTML = '<div class="search-loading">Searching...</div>';
     
     try {
-        const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=6&key=${YOUTUBE_API_KEY}`
-        );
+        // Call backend API (Vercel) instead of YouTube directly
+        const apiUrl = `${API_BASE_URL}/api/search?q=${encodeURIComponent(query)}&maxResults=6`;
+        const response = await fetch(apiUrl);
         
         const data = await response.json();
         
-        if (data.items && data.items.length > 0) {
-            displaySearchResults(data.items);
+        if (data.success && data.data && data.data.length > 0) {
+            displaySearchResults(data.data);
         } else {
             searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
         }
     } catch (error) {
         console.error('Search error:', error);
-        searchResults.innerHTML = '<div class="search-error">Search failed</div>';
+        searchResults.innerHTML = '<div class="search-error">Search failed. Please try again.</div>';
     }
 }
 
