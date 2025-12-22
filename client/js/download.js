@@ -56,13 +56,27 @@ async function fetchVideoData(url) {
             }
         }
 
-        displayResults(data.data, isShort, shortVideoId);
+        // For regular videos, also fetch MP3
+        let mp3Data = null;
+        if (!isShort) {
+            try {
+                const mp3Response = await fetch(`https://api.ferdev.my.id/downloader/ytmp3?link=${encodeURIComponent(url)}&apikey=${apiKey}`);
+                const mp3JsonData = await mp3Response.json();
+                if (mp3JsonData.success && mp3JsonData.data) {
+                    mp3Data = mp3JsonData.data;
+                }
+            } catch (e) {
+                console.log('MP3 fetch failed, continuing with video only');
+            }
+        }
+
+        displayResults(data.data, isShort, shortVideoId, mp3Data);
     } catch (error) {
         showError(error.message);
     }
 }
 
-function displayResults(data, isShort = false, shortVideoId = null) {
+function displayResults(data, isShort = false, shortVideoId = null, mp3Data = null) {
     loadingState.style.display = 'none';
     errorState.style.display = 'none';
     resultsState.style.display = 'block';
@@ -72,6 +86,8 @@ function displayResults(data, isShort = false, shortVideoId = null) {
     let downloadUrl = '';
     let videoTitle = '';
     let thumbnailUrl = '';
+    let mp3Url = '';
+    let mp3Size = '';
 
     if (isShort) {
         // Handle YouTube Shorts format: { title, download }
@@ -86,6 +102,12 @@ function displayResults(data, isShort = false, shortVideoId = null) {
         // Handle regular YouTube format: { metadata, dlink }
         const { metadata, dlink } = data;
         downloadUrl = dlink;
+        
+        // Handle MP3 data
+        if (mp3Data) {
+            mp3Url = mp3Data.dlink;
+            mp3Size = mp3Data.size ? formatFileSize(mp3Data.size) : '';
+        }
         
         // Display video card if we have metadata
         if (metadata) {
@@ -187,17 +209,28 @@ function displayResults(data, isShort = false, shortVideoId = null) {
         `;
     }
 
-    // Process download link
+    // Process download links
     let downloadLinks = [];
 
     if (downloadUrl) {
         const label = isShort ? 'Download Short (MP4)' : 'Download MP4 (Best Quality)';
-        downloadLinks = [{
+        downloadLinks.push({
             url: downloadUrl,
             label: label,
             extension: 'mp4',
             id: 0
-        }];
+        });
+    }
+
+    // Add MP3 option for regular videos
+    if (!isShort && mp3Url) {
+        downloadLinks.push({
+            url: mp3Url,
+            label: 'Download Audio (MP3)',
+            extension: 'mp3',
+            size: mp3Size,
+            id: 1
+        });
     }
 
     // Display download links
