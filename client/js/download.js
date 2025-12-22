@@ -29,22 +29,21 @@ async function fetchVideoData(url) {
         resultsState.style.display = 'none';
 
         const apiKey = "key-elfs";
-        const apiUrl = `https://api.ferdev.my.id/downloader/allinone?link=${encodeURIComponent(url)}&apikey=${apiKey}`;
+        const apiUrl = `https://api.ferdev.my.id/downloader/ytmp4?link=${encodeURIComponent(url)}&apikey=${apiKey}`;
 
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
-            throw new Error("Failed to fetch download links. Please check the URL and try again.");
+            throw new Error("Failed to fetch YouTube video. Please check the URL and try again.");
         }
 
         const data = await response.json();
-        const result = data.data || data.result || data;
-
-        if (!result) {
-            throw new Error("No data found for this link.");
+        
+        if (!data.success || !data.data) {
+            throw new Error("Invalid YouTube URL or video not found.");
         }
 
-        displayResults(result);
+        displayResults(data.data);
     } catch (error) {
         showError(error.message);
     }
@@ -57,83 +56,90 @@ function displayResults(data) {
     downloadAnotherBtn.style.display = 'flex';
     document.getElementById('adSpaceBottom').style.display = 'block';
 
-    const { title, thumbnail, author, medias, url, duration, ...rest } = data;
+    const { metadata, dlink } = data;
 
     // Display video card if we have metadata
-    if (title || thumbnail || author || duration) {
+    if (metadata) {
         const videoCard = document.getElementById('videoCard');
         videoCard.style.display = 'block';
 
-        if (thumbnail) {
+        if (metadata.thumbnail) {
             const thumbnailSection = document.getElementById('thumbnailSection');
             thumbnailSection.style.display = 'block';
-            document.getElementById('thumbnail').src = thumbnail;
+            document.getElementById('thumbnail').src = metadata.thumbnail;
         }
 
-        if (title) {
-            document.getElementById('videoTitle').textContent = title;
+        if (metadata.title) {
+            document.getElementById('videoTitle').textContent = metadata.title;
         }
 
         // Display metadata
         const videoMeta = document.getElementById('videoMeta');
         videoMeta.innerHTML = '';
 
-        if (author) {
+        if (metadata.author) {
             videoMeta.innerHTML += `
                 <div class="meta-item">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <span>${escapeHtml(author)}</span>
+                    <span>${escapeHtml(metadata.author)}</span>
                 </div>
             `;
         }
 
-        if (duration) {
+        if (metadata.duration && metadata.duration.timestamp) {
             videoMeta.innerHTML += `
                 <div class="meta-item">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"></circle>
                         <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
-                    <span>${escapeHtml(duration)}</span>
+                    <span>${escapeHtml(metadata.duration.timestamp)}</span>
+                </div>
+            `;
+        }
+
+        if (metadata.viewers) {
+            const viewerCount = formatViewerCount(metadata.viewers);
+            videoMeta.innerHTML += `
+                <div class="meta-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <span>${viewerCount} views</span>
+                </div>
+            `;
+        }
+
+        if (metadata.upload) {
+            videoMeta.innerHTML += `
+                <div class="meta-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>${escapeHtml(metadata.upload)}</span>
                 </div>
             `;
         }
     }
 
-    // Process download links
+    // Process download link
     let downloadLinks = [];
 
-    if (medias && Array.isArray(medias)) {
-        downloadLinks = medias.map((media, i) => ({
-            url: media.url,
-            label: media.quality || `Download ${i + 1}`,
-            size: media.formattedSize || (media.size ? formatFileSize(media.size) : ''),
-            extension: media.extension || getExtensionFromUrl(media.url),
-            id: i
-        }));
-    } else if (Array.isArray(url)) {
-        downloadLinks = url.map((item, i) => ({
-            url: item.url,
-            label: item.quality || `Download ${i + 1}`,
-            extension: item.ext || getExtensionFromUrl(item.url),
-            id: i
-        }));
-    } else if (typeof url === 'string') {
+    if (dlink) {
         downloadLinks = [{
-            url: url,
-            label: 'Download',
-            extension: getExtensionFromUrl(url),
+            url: dlink,
+            label: 'Download MP4 (Best Quality)',
+            extension: 'mp4',
             id: 0
         }];
     }
-
-    // Remove duplicates
-    downloadLinks = downloadLinks.filter((link, index, self) =>
-        index === self.findIndex((t) => t.url === link.url)
-    );
 
     // Display download links
     const downloadLinksContainer = document.getElementById('downloadLinks');
@@ -174,13 +180,13 @@ function displayResults(data) {
         downloadLinksContainer.innerHTML += html;
     });
 
-    // Display dynamic details
-    const dynamicDetails = Object.entries(rest).filter(([key, value]) => {
-        if (['status', 'code', 'success', 'message', 'medias', 'url', 'thumbnail', 'title', 'author', 'duration'].includes(key)) return false;
+    // Display dynamic details from metadata
+    const dynamicDetails = metadata ? Object.entries(metadata).filter(([key, value]) => {
+        if (['title', 'thumbnail', 'author', 'duration', 'viewers', 'upload', 'description', 'channel'].includes(key)) return false;
         if (typeof value === 'object' && value !== null) return false;
         if (!value || (Array.isArray(value) && value.length === 0)) return false;
         return true;
-    });
+    }) : [];
 
     if (dynamicDetails.length > 0) {
         document.getElementById('detailsSection').style.display = 'block';
@@ -279,4 +285,15 @@ function escapeHtml(text) {
 
 function escapeAttr(text) {
     return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function formatViewerCount(count) {
+    if (count >= 1000000000) {
+        return (count / 1000000000).toFixed(1) + 'B';
+    } else if (count >= 1000000) {
+        return (count / 1000000).toFixed(1) + 'M';
+    } else if (count >= 1000) {
+        return (count / 1000).toFixed(1) + 'K';
+    }
+    return count.toString();
 }
