@@ -36,15 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = `/download.html?url=${encodeURIComponent(url)}`;
         }
     });
-
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.search-result-item')) {
-            return;
-        }
-        if (!e.target.closest('.search-wrapper')) {
-            searchResults.innerHTML = '';
-        }
-    });
 });
 
 async function searchYouTube(query) {
@@ -53,7 +44,7 @@ async function searchYouTube(query) {
     
     try {
         const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=5&key=${YOUTUBE_API_KEY}`
+            `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=6&key=${YOUTUBE_API_KEY}`
         );
         
         const data = await response.json();
@@ -71,23 +62,29 @@ async function searchYouTube(query) {
 
 function displaySearchResults(items) {
     const searchResults = document.getElementById('searchResults');
-    const urlInput = document.getElementById('urlInput');
     
-    let html = '<div class="search-results-list">';
+    let html = '<div class="search-results-grid">';
     
     items.forEach(item => {
         const videoId = item.id.videoId;
         const title = escapeHtml(item.snippet.title);
         const channel = escapeHtml(item.snippet.channelTitle);
-        const thumbnail = item.snippet.thumbnails.default.url;
+        const thumbnail = item.snippet.thumbnails.medium.url;
         const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
         
         html += `
-            <div class="search-result-item" onclick="selectVideo('${videoUrl}')">
-                <img src="${thumbnail}" alt="Video thumbnail" class="search-result-thumbnail">
-                <div class="search-result-info">
-                    <div class="search-result-title">${title}</div>
-                    <div class="search-result-channel">${channel}</div>
+            <div class="search-result-card" onclick="selectVideo('${videoUrl}')">
+                <div class="card-thumbnail">
+                    <img src="${thumbnail}" alt="Video thumbnail">
+                    <div class="card-play-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${title}</div>
+                    <div class="card-channel">${channel}</div>
                 </div>
             </div>
         `;

@@ -86,7 +86,7 @@
                 <div class="form-wrapper" style="animation: fadeInUp 0.6s ease-out 0.4s both">
                     <form id="downloadForm" class="download-form">
                         <div class="form-group">
-                            <div class="form-input-wrapper search-wrapper">
+                            <div class="form-input-wrapper">
                                 <svg class="form-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                                     <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
@@ -98,7 +98,6 @@
                                     class="form-input" 
                                     required
                                 >
-                                <div id="searchResults" class="search-results"></div>
                                 <span class="error-message" id="errorMessage"></span>
                             </div>
                             <button type="submit" class="download-btn" id="submitBtn">
@@ -112,6 +111,9 @@
                         </div>
                     </form>
                 </div>
+
+                <!-- Search Results Cards -->
+                <div id="searchResults" class="search-results-container" style="animation: fadeInUp 0.6s ease-out 0.5s both"></div>
             </div>
         </section>
 
