@@ -1,9 +1,7 @@
 let searchTimeout;
 
-// Get backend API base URL
-const API_BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:5000' 
-  : '';
+// YouTube Data API Key
+const YOUTUBE_API_KEY = 'AIzaSyAPozavhnaoDbUarZB6rQlfar1K6qlLnCE';
 
 document.addEventListener('DOMContentLoaded', function() {
     const urlInput = document.getElementById('urlInput');
@@ -47,14 +45,14 @@ async function searchYouTube(query) {
     searchResults.innerHTML = '<div class="search-loading">Searching...</div>';
     
     try {
-        // Call backend API (Vercel) instead of YouTube directly
-        const apiUrl = `${API_BASE_URL}/api/search?q=${encodeURIComponent(query)}&maxResults=6`;
+        // Call YouTube Data API directly
+        const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=6&key=${YOUTUBE_API_KEY}`;
         const response = await fetch(apiUrl);
         
         const data = await response.json();
         
-        if (data.success && data.data && data.data.length > 0) {
-            displaySearchResults(data.data);
+        if (data.items && data.items.length > 0) {
+            displaySearchResults(data.items);
         } else {
             searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
         }
