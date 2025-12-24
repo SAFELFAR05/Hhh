@@ -5,6 +5,36 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const urlParams = new URLSearchParams(window.location.search);
 const videoUrl = urlParams.get('url');
 
+// Function to normalize YouTube URLs
+function normalizeYouTubeUrl(url) {
+    if (!url) return null;
+    
+    // Handle youtube.com/shorts/ID format
+    const shortsMatch = url.match(/(?:youtube\.com\/shorts\/|youtu\.be\/shorts\/)([\w-]+)/);
+    if (shortsMatch) {
+        return `https://www.youtube.com/shorts/${shortsMatch[1]}`;
+    }
+    
+    // Handle youtube.com/watch?v=ID format (with or without additional params)
+    const watchMatch = url.match(/(?:youtube\.com\/watch\?v=|youtube\.com\/.*v=)([\w-]+)/);
+    if (watchMatch) {
+        return `https://www.youtube.com/watch?v=${watchMatch[1]}`;
+    }
+    
+    // Handle youtu.be/ID format
+    const shortMatch = url.match(/youtu\.be\/([\w-]+)/);
+    if (shortMatch) {
+        return `https://www.youtube.com/watch?v=${shortMatch[1]}`;
+    }
+    
+    // If URL looks like a standard YouTube URL, return as-is
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        return url;
+    }
+    
+    return null;
+}
+
 // DOM elements
 const loadingState = document.getElementById('loadingState');
 const errorState = document.getElementById('errorState');
@@ -30,10 +60,16 @@ async function fetchVideoData(url) {
 
         const apiKey = "key-elfs";
         
+        // Normalize YouTube URL
+        const normalizedUrl = normalizeYouTubeUrl(url);
+        if (!normalizedUrl) {
+            throw new Error("Invalid YouTube URL format.");
+        }
+        
         // Detect if it's a YouTube Short or regular video
-        const isShort = url.includes('/shorts/');
+        const isShort = normalizedUrl.includes('/shorts/') || normalizedUrl.includes('shorts/');
         const endpoint = isShort ? 'ytshorts' : 'ytmp4';
-        const apiUrl = `https://api.ferdev.my.id/downloader/${endpoint}?link=${encodeURIComponent(url)}&apikey=${apiKey}`;
+        const apiUrl = `https://api.ferdev.my.id/downloader/${endpoint}?link=${encodeURIComponent(normalizedUrl)}&apikey=${apiKey}`;
 
         const response = await fetch(apiUrl);
 
