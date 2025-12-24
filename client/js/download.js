@@ -96,7 +96,7 @@ async function fetchVideoData(url) {
         let mp3Data = null;
         if (!isShort) {
             try {
-                const mp3Response = await fetch(`https://api.ferdev.my.id/downloader/ytmp3?link=${encodeURIComponent(url)}&apikey=${apiKey}`);
+                const mp3Response = await fetch(`https://api.ferdev.my.id/downloader/ytmp3?link=${encodeURIComponent(normalizedUrl)}&apikey=${apiKey}`);
                 const mp3JsonData = await mp3Response.json();
                 if (mp3JsonData.success && mp3JsonData.data) {
                     mp3Data = mp3JsonData.data;
