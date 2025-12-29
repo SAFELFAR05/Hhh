@@ -46,7 +46,7 @@ async function searchYouTube(query) {
     
     try {
         // Call YouTube Data API directly
-        const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=6&key=${YOUTUBE_API_KEY}`;
+        const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=20&key=${YOUTUBE_API_KEY}`;
         const response = await fetch(apiUrl);
         
         const data = await response.json();
